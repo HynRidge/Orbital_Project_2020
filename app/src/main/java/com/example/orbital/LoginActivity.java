@@ -38,9 +38,14 @@ public class LoginActivity extends AppCompatActivity {
         needAnAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+                sendUserToRegisterActivity();
             }
         });
+    }
+
+    private void sendUserToRegisterActivity() {
+        Intent activity = new Intent(getApplicationContext(),RegisterActivity.class);
+        startActivity(activity);
     }
 
     private void sendUserToMainActivity() {
