@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
 public class LoginActivity extends AppCompatActivity {
     EditText phoneNumber, password;
     Button loginBtn;
+    TextView needAnAcc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         phoneNumber = findViewById(R.id.phone_number_login);
         password = findViewById(R.id.password_login);
         loginBtn = findViewById(R.id.login_button);
+        needAnAcc = findViewById(R.id.need_an_account);
 
 
         //Toast.makeText(getApplicationContext(),"Welcome to Close Friends",Toast.LENGTH_SHORT).show();
@@ -31,10 +34,17 @@ public class LoginActivity extends AppCompatActivity {
                 sendUserToMainActivity();
             }
         });
+
+        needAnAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO
+            }
+        });
     }
 
     private void sendUserToMainActivity() {
-       Intent activity = new Intent(getApplicationContext(),MainActivity.class);
+        Intent activity = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(activity);
     }
 }
