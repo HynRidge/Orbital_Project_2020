@@ -9,49 +9,38 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import java.util.ArrayList;
+
 public class TabsAccessorAdapter extends FragmentPagerAdapter{
 
+    ArrayList<Fragment> fragments;
+    ArrayList<String> titles;
 
     public TabsAccessorAdapter(FragmentManager fm) {
-        super(fm);
+        super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        fragments = new ArrayList<>();
+        titles = new ArrayList<>();
     }
 
+    public void addFragment(Fragment fragment, String title) {
+        fragments.add(fragment);
+        titles.add(title);
+    }
+
+    @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                ChatsFragment chatsFragment = new ChatsFragment();
-                return chatsFragment;
-            case 1:
-                GroupsFragment groupsFragment = new GroupsFragment();
-                return groupsFragment;
-            case 2:
-                ContactsFragment contactsFragment = new ContactsFragment();
-                return contactsFragment;
-            default:
-                return null;
-
-        }
+        return fragments.get(position);
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return fragments.size();
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "Chats";
-            case 1:
-                return "Group";
-            case 2:
-                return "Contacts";
-            default:
-                return null;
-
-        }
+        return titles.get(position);
     }
 }
