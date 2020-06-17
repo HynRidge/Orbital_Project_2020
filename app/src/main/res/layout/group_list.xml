@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/group_parent"
+    app:cardCornerRadius="7dp"
+    android:elevation="7dp"
+    android:layout_marginTop="10dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/group_image"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/group_name"
+            android:layout_toEndOf="@+id/group_image"
+            android:text="Group Name"
+            android:layout_marginStart="10dp"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>
