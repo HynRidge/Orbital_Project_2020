@@ -24,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
         myViewPager = findViewById(R.id.main_tabs_pager);
         tabsAccessorAdapter = new TabsAccessorAdapter(getSupportFragmentManager());
+
+        tabsAccessorAdapter.addFragment(new ChatsFragment(), "Chats");
+        tabsAccessorAdapter.addFragment(new GroupsFragment(),"Groups");
+        tabsAccessorAdapter.addFragment(new ContactsFragment(), "Contacts");
+
         myViewPager.setAdapter(tabsAccessorAdapter);
 
         myTabLayout = findViewById(R.id.main_tabs);
