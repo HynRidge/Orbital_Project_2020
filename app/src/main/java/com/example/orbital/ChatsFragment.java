@@ -30,6 +30,7 @@ public class ChatsFragment extends Fragment {
         chatRecView = view.findViewById(R.id.chatRecView);
         chatRecView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        //Creating data manually
         ArrayList<chatModel> chats = new ArrayList<>();
 
         chats.add(new chatModel("Heinrich",R.drawable.brad_pitt, "Hi..."));
