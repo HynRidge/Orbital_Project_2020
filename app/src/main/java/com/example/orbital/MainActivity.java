@@ -10,6 +10,9 @@ import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar mToolbar;
+    ViewPager myViewPager;
+    TabLayout myTabLayout;
+    TabsAccessorAdapter tabsAccessorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,5 +21,17 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Close Friends");
+
+        myViewPager = findViewById(R.id.main_tabs_pager);
+        tabsAccessorAdapter = new TabsAccessorAdapter(getSupportFragmentManager());
+
+        tabsAccessorAdapter.addFragment(new ChatsFragment(), "Chats");
+        tabsAccessorAdapter.addFragment(new GroupsFragment(),"Groups");
+        tabsAccessorAdapter.addFragment(new ContactsFragment(), "Contacts");
+
+        myViewPager.setAdapter(tabsAccessorAdapter);
+
+        myTabLayout = findViewById(R.id.main_tabs);
+        myTabLayout.setupWithViewPager(myViewPager);
     }
 }
