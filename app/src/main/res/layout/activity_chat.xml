@@ -5,26 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background = '@android:color/background_light'
     tools:context=".ChatActivity">
 
     <include
         android:id="@+id/chat_toolbar"
         layout="@layout/toolbar">
     </include>
-    <ListView android:id="@+id/lv_chats"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lv_chats"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="8dp"
-        android:layout_below="@+id/chat_toolbar" />
+        android:layout_below="@+id/chat_toolbar"
+        android:layout_above="@+id/ll_message"/>
 
-    <LinearLayout android:id="@+id/ll_message"
+    <RelativeLayout android:id="@+id/ll_message"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/chat_toolbar"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary">
+        android:layout_alignParentBottom="true">
         <EditText android:id="@+id/edit_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,15 +32,21 @@
             android:layout_weight="1"
             android:layout_marginLeft="4dp"
             android:textSize="30sp"/>
-    </LinearLayout>
-
+        <Button
+            android:id="@+id/rounded_button"
+            android:text="SEND"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/rounded_button"
+            />
+    </RelativeLayout>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/custom_profile_image"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher_background"
         android:layout_marginStart="10dp" />
     <TextView
         android:layout_width="wrap_content"
