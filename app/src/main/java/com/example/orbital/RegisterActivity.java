@@ -1,4 +1,4 @@
-package com.example.orbital;
+package com.example.orbitalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -70,3 +70,5 @@ public class RegisterActivity extends AppCompatActivity {
         alreadyHaveAccountLink = (TextView) findViewById(R.id.already_have_account_link);
     }
 }
+
+
