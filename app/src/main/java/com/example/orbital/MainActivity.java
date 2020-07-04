@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
@@ -13,11 +14,15 @@ public class MainActivity extends AppCompatActivity {
     ViewPager myViewPager;
     TabLayout myTabLayout;
     TabsAccessorAdapter tabsAccessorAdapter;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MainActivity.context = getApplicationContext();
+
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Close Friends");
@@ -33,5 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         myTabLayout = findViewById(R.id.main_tabs);
         myTabLayout.setupWithViewPager(myViewPager);
+    }
+
+    public static Context getAppContext() {
+        return MainActivity.context;
     }
 }

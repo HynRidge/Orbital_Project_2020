@@ -1,2 +1,3 @@
+include ':orbital'
 rootProject.name='Orbital'
 include ':app'
