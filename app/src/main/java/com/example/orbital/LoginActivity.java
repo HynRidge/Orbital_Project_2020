@@ -78,13 +78,13 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("Response failed", error.toString());
             }
         }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String,String> params =  new HashMap<>();
-//                params.put("phone_number", phoneNumber.getText().toString().trim());
-//                params.put("password",password.getText().toString().trim());
-//                return params;
-//            }
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =  new HashMap<>();
+                params.put("phone_number", phoneNumber.getText().toString().trim());
+                params.put("password",password.getText().toString().trim());
+                return params;
+            }
         };
 //        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
 //                6000,
