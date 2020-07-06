@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     TextView needAnAcc;
     RequestQueue queue;
     String url ="http://172.31.123.95:8000/account/api/token/login/";
+    ArrayList stringResponse = new ArrayList();
+    String accessToken,refreshToken;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +72,10 @@ public class LoginActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println(response);
                 Log.d("Server responded",response);
+
+                processingResponse(response);
+
                 sendUserToMainActivity();
             }
         }, new Response.ErrorListener() {
@@ -94,7 +100,19 @@ public class LoginActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-
+    private void processingResponse(String response) {
+        String[] responses = response.split(",");
+//        System.out.println(responses.length);
+        for (String response1 : responses) {
+            String[] responses2 = response1.split(":");
+//            System.out.println(responses2[1]);
+            stringResponse.add(responses2[1]);
+        }
+        refreshToken =stringResponse.get(0).toString();
+        accessToken = stringResponse.get(1).toString();
+        System.out.println(refreshToken);
+        System.out.println(accessToken);
+    }
 
     private boolean IsValidated() {
         if(phoneNumber.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
