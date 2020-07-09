@@ -28,8 +28,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,12 +41,13 @@ public class Register2Activity extends AppCompatActivity {
     EditText enterBirthday, enterNickname;
     Button submitBtn;
     RequestQueue queue;
-    String url = "http://172.31.123.95:8000/account/register/";
+    String url = "http://172.31.120.153:8000/account/register/";
     String firstNameSaved = RegisterActivity.firstNameSaved;
     String lastNameSaved = RegisterActivity.lastNameSaved;
     String emailSaved = RegisterActivity.emailSaved;
     String passwordSaved = RegisterActivity.passwordSaved;
     String phoneNumberSaved = RegisterActivity.phoneNumberSaved;
+    static long USER_ID ;
 
 
     @Override
@@ -66,7 +69,6 @@ public class Register2Activity extends AppCompatActivity {
                     System.out.println(firstNameSaved + " " + lastNameSaved + " " + emailSaved + " " + passwordSaved + " " + phoneNumberSaved + ' ' + enterNickname.getText().toString().trim()
                             + " " + enterBirthday.getText().toString().trim());
                     register();
-                    sendUserToMainActivity();
                 }
             }
         });
@@ -78,38 +80,12 @@ public class Register2Activity extends AppCompatActivity {
     }
 
     private void register() {
-//        JSONObject params = new JSONObject();
-//        try {
-//            params.put("first_name", firstNameSaved);
-//            params.put("last_name",lastNameSaved);
-//            params.put("email", emailSaved);
-//            params.put("password",passwordSaved);
-//            params.put("phone_number",phoneNumberSaved);
-//            params.put("nickname", enterNickname.getText().toString().trim());
-//            params.put("birthday",enterBirthday.getText().toString().trim());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, params,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                       Toast.makeText(MainActivity.getAppContext(),response.toString(),Toast.LENGTH_SHORT).show();
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(MainActivity.getAppContext(),error.toString(),Toast.LENGTH_SHORT).show();
-//            }
-//        } );
-
-//        queue.add(jsonObjectRequest);
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Response", response);
+                processRegisterResponse(response);
+                sendUserToMainActivity();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -162,6 +138,19 @@ public class Register2Activity extends AppCompatActivity {
 //            }
         };
         queue.add(stringRequest);
+    }
+
+    private void processRegisterResponse(String response) {
+        ArrayList<String> stringResponse = new ArrayList();
+        String[] responses = response.split(",");
+//        System.out.println(responses.length);
+        for (String response1 : responses) {
+            String[] responses2 = response1.split(":");
+//            System.out.println(responses2[1]);
+            stringResponse.add(responses2[1]);
+        }
+        USER_ID = Long.parseLong(stringResponse.get(0).toString());
+        System.out.println(USER_ID);
     }
 
     private boolean isValidate() {
