@@ -1,5 +1,5 @@
 from rest_framework.serializers import (ModelSerializer,ValidationError)
-from restaccount.models import RegisterUser
+from restaccount.models import RegisterUser,Message,Participants,Room
 # Login
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -82,3 +82,73 @@ class LoginSerializer(TokenObtainPairSerializer):
         data['phone_number'] = self.user.phone_number
 
         return data
+
+
+class AddRoomSerializer(ModelSerializer):
+    class Meta:
+        model = Room
+        fields = [
+            'id',
+            'name',
+            'type',
+        ]
+
+    def create(self,validated_data):
+        name = validated_data['name']
+        chat_type = validated_data['type']
+
+        room_obj = Room(
+            name = name,
+            type = chat_type,
+        )
+        room_obj.save()
+        return room_obj
+
+
+
+class AddMessageSerializer(ModelSerializer):
+    class Meta:
+        model = Message
+        fields = [
+            'id',
+            'room',
+            'user',
+            'message',
+        ]
+    def create(self,validated_data):
+        message = validated_data['message']
+        room = validated_data['room']
+        user = validated_data['user']
+        msg_obj = Message(
+            message = message,
+            room = room,
+            user = user,
+        )
+        msg_obj.save()
+        return msg_obj
+
+class AddParticipantsSerializer(ModelSerializer):
+    class Meta:
+        model = Participants
+        fields = [
+            'id',
+            'room',
+            'user',
+        ]
+    def create(self,validated_data):
+        user = validated_data['user']
+        room = validated_data['room']
+        participants_obj = Participants(
+            room = room,
+            user = user,
+        )
+        participants_obj.save()
+        return participants_obj
+
+class listRegisteredUserSerializer(ModelSerializer):
+    class Meta:
+        model = RegisterUser
+        fields=[
+            'id',
+            'phone_number'
+        ]

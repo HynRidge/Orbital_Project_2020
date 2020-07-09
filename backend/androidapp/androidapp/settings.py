@@ -15,7 +15,7 @@ SECRET_KEY = '6qdk058^8b2@-pnw!cr1pbd(sao)vj+v69&4874zjh95xu7pg)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.31.123.95',]
+ALLOWED_HOSTS = ['172.31.120.153']
 
 
 # Application definition
@@ -27,6 +27,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 'django.contrib.postgres',
+    # 'django_postgres_extensions,'
     
     'rest_framework',
 
