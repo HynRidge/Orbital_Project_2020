@@ -29,8 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginBtn;
     TextView needAnAcc;
     RequestQueue queue;
-    String url ="http://172.31.123.95:8000/account/api/token/login/";
-    ArrayList stringResponse = new ArrayList();
+    String url ="http://172.31.120.153:8000/account/api/token/login/";
     String accessToken,refreshToken;
 
 
@@ -101,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void processingResponse(String response) {
+        ArrayList<String> stringResponse = new ArrayList();
         String[] responses = response.split(",");
 //        System.out.println(responses.length);
         for (String response1 : responses) {
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean IsValidated() {
         if(phoneNumber.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
-            Toast.makeText(getApplicationContext(),"Fill in the required Field",Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(),"Fill in the required Field",Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
