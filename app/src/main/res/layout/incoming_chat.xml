@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/chat_parent"
+    app:cardCornerRadius="7dp"
+    android:elevation="7dp"
+    android:layout_marginTop="10dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/chat_template">
+
+        <ImageView
+            android:id="@+id/sender_image"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_launcher_background" />
+        <TextView
+            android:id="@+id/sender_name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/sender_image"
+            android:layout_marginStart="10dp"
+            android:text="Sender Name"
+            android:textSize="20sp"
+            android:textAlignment="textStart"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chat_bubble_outgoing"
+            android:layout_marginTop="30dp"
+            android:id="@+id/chat_body">
+
+            <TextView
+                android:id="@+id/sender_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chat Content"
+                android:textAlignment="textStart"
+                android:layout_marginRight="19dp"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
