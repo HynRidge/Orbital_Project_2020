@@ -6,6 +6,5 @@
     android:layout_height="wrap_content"
     android:background="#ffc72b"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-
+    
 </androidx.appcompat.widget.Toolbar>
