@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".Friends">
+    <TextView
+        android:id="@+id/close_friends_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CloseFriends"
+        android:textSize="20sp">
+    </TextView>
+    <Button
+        android:id="@+id/add_friends_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:text="Add Friends">
+    </Button>
+    <TextView
+        android:id="@+id/changeNicknameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/close_friends_tv"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="Change Your Nickname"
+        android:textSize="25sp"
+        android:textStyle="bold"></TextView>
+
+    <EditText
+        android:id="@+id/changeNicknameEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
+        android:layout_margin="10dp"
+        android:padding="15dp"
+        android:hint="Enter Your New Nickname"
+        android:maxLines="1"
+        android:layout_below="@id/changeNicknameTv" />
+</RelativeLayout>
