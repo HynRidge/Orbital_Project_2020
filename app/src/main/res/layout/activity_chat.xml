@@ -42,7 +42,7 @@
 
             android:background="@drawable/rounded_button"
 
-            android:src="@drawable/rounded_button_2"
+            android:src="@drawable/rounded_button"
 
             />
     </RelativeLayout>

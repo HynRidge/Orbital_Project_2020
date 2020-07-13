@@ -1,4 +1,4 @@
-package com.example.closefriendsapp;
+package com.example.orbital;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,7 +54,7 @@ public class ChatActivity extends AppCompatActivity {
         View actionBarView = layoutInflater.inflate(R.layout.toolbar,null);
         actionBar.setCustomView(actionBarView);
 
-        view = findViewById(R.id.rv_chats);
+        view = findViewById(R.id.lv_chats);
 
         name = findViewById(R.id.username);
 
@@ -62,6 +62,6 @@ public class ChatActivity extends AppCompatActivity {
 
         profileImage = findViewById(R.id.custom_profile_image);
 
-        sendButton = findViewById(R.id.rounded_send_button);
+        sendButton = findViewById(R.id.rounded_button);
     }
 }

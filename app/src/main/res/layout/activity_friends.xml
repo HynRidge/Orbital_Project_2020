@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="#ffc72b"
     tools:context=".Friends">
     <TextView
         android:id="@+id/close_friends_tv"
@@ -41,7 +41,7 @@
         android:id="@+id/changeNicknameEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edittext"
+        android:background="@drawable/rounded_edit_text"
         android:layout_margin="10dp"
         android:padding="15dp"
         android:hint="Enter Your New Nickname"
@@ -64,7 +64,7 @@
         android:id="@+id/UpdateStatusEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edittext"
+        android:background="@drawable/rounded_edit_text"
         android:layout_margin="10dp"
         android:padding="15dp"
         android:hint="Change Your Status"

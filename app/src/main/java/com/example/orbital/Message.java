@@ -1,3 +1,5 @@
+package com.example.orbital;
+
 public class Message {
         private String from, message, type, to, time, date, name;
 
