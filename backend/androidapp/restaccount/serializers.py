@@ -150,5 +150,4 @@ class listRegisteredUserSerializer(ModelSerializer):
         model = RegisterUser
         fields=[
             'id',
-            'phone_number'
         ]
