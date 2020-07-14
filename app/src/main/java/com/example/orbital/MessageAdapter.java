@@ -1,53 +1,51 @@
 package com.example.orbital;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.example.closefriendsapp.R;
+import com.example.orbital.R;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.stfalcon.frescoimageviewer.ImageViewer;
+
+import com.example.orbital.Model.Message;
+//import com.stfalcon.frescoimageviewer.ImageViewer;
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
 
+    final static int MSG_TYPE_LEFT = 1;
+    final static int MSG_TYPE_RIGHT = 2;
     ArrayList<Message> messageList;
 
-    public MessageAdapter(ArrayList<Message> messageList){
+    private Context mContext;
+
+    public MessageAdapter(Context mContext,ArrayList<Message> messageList){
+        this.mContext = mContext;
         this.messageList = messageList;
     }
 
     @NonNull
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.media, null, false);
-        RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutView.setLayoutParams(lp);
-
-        MessageViewHolder rcv = new MessageViewHolder(layoutView);
-        return rcv;
+        if(viewType == MSG_TYPE_RIGHT) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.outgoing_chat,parent,false);
+            return new MessageAdapter.MessageViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.incoming_chat,parent,false);
+            return new MessageAdapter.MessageViewHolder(view);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MessageViewHolder holder, final int position) {
-        holder.mMessage.setText(messageList.get(position).getMessage());
-        holder.mSender.setText(messageList.get(position).getSenderId());
+        Message message = messageList.get(position);
+        holder.show_message.setText(message.getMessage());
 
-        if(messageList.get(holder.getAdapterPosition()).getMediaUrlList().isEmpty())
-            holder.mViewMedia.setVisibility(View.GONE);
-
-        holder.mViewMedia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new ImageViewer.Builder(v.getContext(), messageList.get(holder.getAdapterPosition()).getMediaUrlList())
-                        .setStartPosition(0)
-                        .show();
-            }
-        });
+        //Remember to set up for profile pic
     }
 
     @Override
@@ -55,23 +53,25 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         return messageList.size();
     }
 
-
-
-
+    @Override
+    public int getItemViewType(int position) {
+        if(messageList.get(position).getSenderID() == Register2Activity.USER_ID) {
+            return MSG_TYPE_RIGHT;
+        } else {
+            return MSG_TYPE_LEFT;
+        }
+    }
 
     class MessageViewHolder extends RecyclerView.ViewHolder{
-        TextView mMessage,
-                mSender;
-        Button mViewMedia;
-        LinearLayout mLayout;
-        MessageViewHolder(View view){
-            super(view);
-            mLayout = view.findViewById(R.id.layout);
+        public TextView show_message;
+        public CircleImageView profile_image;
 
-            mMessage = view.findViewById(R.id.message);
-            mSender = view.findViewById(R.id.sender);
+        MessageViewHolder(View itemview){
+            super(itemview);
+            profile_image = itemview.findViewById(R.id.profile_image);
+            show_message = itemview.findViewById(R.id.show_message);
 
-            mViewMedia = view.findViewById(R.id.viewMedia);
+
         }
     }
 }
