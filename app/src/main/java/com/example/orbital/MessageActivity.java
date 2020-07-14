@@ -3,6 +3,7 @@ package com.example.orbital;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -11,19 +12,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.orbital.Model.Message;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity {
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class MessageActivity extends AppCompatActivity {
 
      private Toolbar chatToolBar;
 
-     private RecyclerView view;
+     private RecyclerView recyclerView;
 
-     private TextView name, typeMessageHint;
+     CircleImageView profile_image;
+
+     private TextView nickname;
+
+     private EditText text_send;
 
      private ImageView profileImage;
 
@@ -36,7 +46,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_message);
     }
 
     @SuppressLint("RestrictedApi")
@@ -54,14 +64,17 @@ public class ChatActivity extends AppCompatActivity {
         View actionBarView = layoutInflater.inflate(R.layout.toolbar,null);
         actionBar.setCustomView(actionBarView);
 
-        view = findViewById(R.id.lv_chats);
+        recyclerView = findViewById(R.id.message_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
 
-        name = findViewById(R.id.username);
+        nickname = findViewById(R.id.username);
 
-        typeMessageHint = findViewById(R.id.edit_message);
+        text_send = findViewById(R.id.edit_message);
 
         profileImage = findViewById(R.id.custom_profile_image);
 
-        sendButton = findViewById(R.id.rounded_button);
+        sendButton = findViewById(R.id.send_button);
     }
 }
