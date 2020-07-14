@@ -4,7 +4,7 @@ from rest_framework.parsers import JSONParser
 from restaccount.models import RegisterUser,Message,Room,Participants
 # Login
 from restaccount.serializers import RegisterSerializers,LoginSerializer,AddMessageSerializer,AddRoomSerializer
-from restaccount.serializers import AddParticipantsSerializer,listRegisteredUserSerializer
+from restaccount.serializers import AddParticipantsSerializer,listRegisteredUserSerializer,GetMessageSerializer
 # LoginSerializers
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.generics import CreateAPIView,ListAPIView
@@ -52,3 +52,13 @@ class RegisterUserByPhoneNumberView(ListAPIView):
         phone_number = self.kwargs['phone_number']
 
         return RegisterUser.objects.filter(phone_number = phone_number)
+
+class GetMessageView(ListAPIView):
+    serializer_class =  GetMessageSerializer
+    
+
+    def get_queryset(self):
+        room_id = self.kwargs['room_id']
+        user_id = self.kwargs['user_id']
+
+        return Message.objects.filter(room = room_id, user = user_id)

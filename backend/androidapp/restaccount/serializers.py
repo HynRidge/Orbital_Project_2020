@@ -151,3 +151,11 @@ class listRegisteredUserSerializer(ModelSerializer):
         fields=[
             'id',
         ]
+
+class GetMessageSerializer(ModelSerializer):
+    class Meta:
+        model = Message
+        fields = [
+            'message',
+        ]
+        
