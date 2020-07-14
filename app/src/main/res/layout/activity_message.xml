@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity">
+    tools:context=".MessageActivity">
 
     <include
         android:id="@+id/chat_toolbar"
         layout="@layout/toolbar">
     </include>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lv_chats"
+        android:id="@+id/message_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
@@ -34,7 +34,7 @@
             android:background="@+id/rounded_edittext"
             android:textSize="30sp"/>
         <Button
-            android:id="@+id/rounded_button"
+            android:id="@+id/send_button"
             android:text="SEND"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
