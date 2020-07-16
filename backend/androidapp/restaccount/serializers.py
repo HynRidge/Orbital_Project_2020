@@ -1,5 +1,5 @@
 from rest_framework.serializers import (ModelSerializer,ValidationError)
-from restaccount.models import RegisterUser,Message,Participants,Room
+from restaccount.models import RegisterUser,Message,Participants,Room,Contact
 # Login
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -158,4 +158,31 @@ class GetMessageSerializer(ModelSerializer):
         fields = [
             'message',
         ]
+
+
+class AddContactSerializer(ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = [
+            'id',
+            'current_user_id',
+            'contact'
+        ]
         
+    def create(self,validated_data):
+        current_user_id = validated_data['current_user_id']
+        contact = validated_data['contact']
+        
+        contact_obj = Contact(
+            current_user_id = current_user_id,
+            contact = contact,
+        )
+        contact_obj.save()
+        return contact_obj
+
+class GetContactWithCurrentUser(ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = [
+            'contact'
+        ]
