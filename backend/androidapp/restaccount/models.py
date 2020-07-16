@@ -88,3 +88,10 @@ class Message(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     user = models.ForeignKey(RegisterUser,on_delete=models.CASCADE)
     message = models.TextField(name = 'message')
+
+class Contact(models.Model):
+    current_user_id= models.IntegerField(name = 'current_user_id')
+    contact = models.ForeignKey(RegisterUser,on_delete = models.CASCADE)
+
+    #current_user --> current_user_id(cache di frontend, upon login (cache idnya))
+    #contact -->  registeruser_id()

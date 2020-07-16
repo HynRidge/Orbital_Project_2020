@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse   
 from rest_framework.parsers import JSONParser
-from restaccount.models import RegisterUser,Message,Room,Participants
+from restaccount.models import RegisterUser,Message,Room,Participants,Contact
 # Login
 from restaccount.serializers import RegisterSerializers,LoginSerializer,AddMessageSerializer,AddRoomSerializer
 from restaccount.serializers import AddParticipantsSerializer,listRegisteredUserSerializer,GetMessageSerializer
+from restaccount.serializers import AddContactSerializer,GetContactWithCurrentUser
 # LoginSerializers
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.generics import CreateAPIView,ListAPIView
@@ -20,7 +21,7 @@ class RegisterView(CreateAPIView):
     queryset = RegisterUser.objects.all()
 
 class LoginView(TokenObtainPairView):
-    permission_classes = IsAuthenticated
+    # permission_classes = IsAuthenticated
     serializer_class = LoginSerializer
 
 
@@ -62,3 +63,16 @@ class GetMessageView(ListAPIView):
         user_id = self.kwargs['user_id']
 
         return Message.objects.filter(room = room_id, user = user_id)
+
+
+class AddContactView(CreateAPIView):
+    serializer_class = AddContactSerializer
+    queryset = Contact.objects.all()
+
+class GetContactView(ListAPIView):
+    serializer_class = GetContactWithCurrentUser
+
+    def get_queryset(self):
+        current_user_id = self.kwargs['current_user_id']
+
+        return Contact.objects.filter(current_user_id = current_user_id) 
