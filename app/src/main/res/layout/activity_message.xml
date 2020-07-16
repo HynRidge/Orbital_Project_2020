@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".ChatActivity">
+
+    tools:context=".MessageActivity">
+
     <include
         android:id="@+id/chat_toolbar"
         layout="@layout/toolbar">
     </include>
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/rv_chats"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:background="@android:color/background_light"
+
+        android:id="@+id/message_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+
         android:layout_below="@+id/chat_toolbar"
         android:layout_above="@+id/ll_message"/>
 
@@ -36,18 +50,31 @@
             android:background="@+id/rounded_edittext"
             android:textSize="30sp"/>
         <Button
+
             android:id="@+id/rounded_send_button"
+
+            android:id="@+id/send_button"
+
             android:text="SEND"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+
             android:background="@drawable/rounded_button"
+
+
+            android:background="@drawable/rounded_button"
+
+            android:src="@drawable/rounded_button"
+
+
             />
     </RelativeLayout>
     <ImageView
         android:id="@+id/custom_profile_image"
         android:layout_width="47dp"
         android:layout_height="47dp"
+
         app:srcCompat="@drawable/profile_pic"
         tools:ignore="VectorDrawableCompat"
         android:layout_alignParentStart="true"
@@ -55,14 +82,31 @@
         android:layout_marginStart="10dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="25dp" />
+
+        android:layout_alignParentStart="true"
+        tools:ignore = "VectorDrawableCompat"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/profile" />
+
+
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/username"
+
         android:text="Kevin"
         android:layout_centerHorizontal="true"
         android:paddingTop="10dp"
         android:textSize="30sp"
+
+        android:text="Mummy"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
+        android:textSize="18sp"
+
         android:textColor="@android:color/background_light"
         />
 
