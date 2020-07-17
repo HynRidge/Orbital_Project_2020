@@ -17,9 +17,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +35,10 @@ public class LoginActivity extends AppCompatActivity {
     Button loginBtn;
     TextView needAnAcc;
     RequestQueue queue;
-    String url ="http://172.31.122.92:8000/account/api/token/login/";
+    String USER_PHONE_NUMBER;
+    String LOGIN_URL ="http://172.31.120.153:8000/account/api/token/login/";
+    String BASE_URL = "http://172.31.120.153:8000/account/";
+    public static int USER_ID;
     String accessToken,refreshToken;
 
 
@@ -68,14 +77,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Server responded",response);
 
+//                System.out.println(USER_PHONE_NUMBER);
+
                 processingResponse(response);
 
-                sendUserToMainActivity();
+                //Make a request to get userID
+                getUserCredentials();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -86,16 +98,49 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params =  new HashMap<>();
-                params.put("phone_number", phoneNumber.getText().toString().trim());
+                params.put("phone_number",phoneNumber.getText().toString().trim());
                 params.put("password",password.getText().toString().trim());
                 return params;
             }
         };
-//        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-//                6000,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
-//        );
+        queue.add(stringRequest);
+    }
+
+    private void getUserCredentials() {
+        String url = BASE_URL +"register-by-phone-number/"+phoneNumber.getText().toString().trim() +"/";
+        final ArrayList<JSONObject> jsonObjects = new ArrayList<>();
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jo;
+                    JSONArray jsonArray = new JSONArray(response);
+                    jo = jsonArray.getJSONObject(0);
+                    USER_ID = jo.getInt("id");
+                    System.out.println(USER_ID);
+                    sendUserToMainActivity();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LoginActivity.this, "There no account with this credentials", Toast.LENGTH_SHORT).show();
+            }
+        }){
+
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("key", "Value");
+                return headers;
+            }
+        };
         queue.add(stringRequest);
     }
 
@@ -110,8 +155,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         refreshToken =stringResponse.get(0).toString();
         accessToken = stringResponse.get(1).toString();
-        System.out.println(refreshToken);
-        System.out.println(accessToken);
+//        System.out.println(refreshToken);
+//        System.out.println(accessToken);
     }
 
     private boolean IsValidated() {
