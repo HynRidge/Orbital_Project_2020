@@ -1,4 +1,4 @@
-package com.example.closefriendsapp;
+package com.example.orbital;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +14,7 @@ import java.util.Locale;
 
 public class AddContactPg extends AppCompatActivity {
 
-    EditText nameEt,phoneNumberEt;
+    EditText phoneNumberEt;
 
     Button submitButton;
 
@@ -23,26 +23,19 @@ public class AddContactPg extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact_pg);
         initialize();
-    }
-    private void initialize() {
-        nameEt = (EditText) findViewById(R.id.nameEt);
-        phoneNumberEt = (EditText) findViewById(R.id.phoneNumberEt);
-        submitButton = (Button) findViewById(R.id.submitButton);
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              if(TextUtils.isEmpty((CharSequence) nameEt)) {
-                  nameEt.setError("Name required");
-                  nameEt.requestFocus();
-                  return;
-              }
                 if (!PhoneNumberUtils.isGlobalPhoneNumber(String.valueOf(phoneNumberEt))) {
                     phoneNumberEt.setError("Please enter a valid phone number");
                     phoneNumberEt.requestFocus();
-                    return;
                 }
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
+    }
+    private void initialize() {
+        phoneNumberEt = (EditText) findViewById(R.id.phoneNumberEt);
+        submitButton = (Button) findViewById(R.id.submitButton);
     }
 }
