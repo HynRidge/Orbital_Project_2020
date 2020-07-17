@@ -47,12 +47,13 @@ class RegisterUser(AbstractBaseUser, PermissionsMixin):
     A custom class for user authentication. It gets rid of 
     'username' and uses 'email' for that purpose.                                                      
     """                                             
-    first_name = models.CharField(max_length=255,name ='first_name')
-    last_name = models.CharField(max_length=255, name = 'last_name') 
-    email = models.EmailField(max_length=255, name = 'email')
-    birthday = models.DateField(name = 'birthday', null = True)
-    nickname = models.CharField(max_length=255,name = 'nickname')
+    first_name = models.CharField(max_length=255,name ='first_name',default='')
+    last_name = models.CharField(max_length=255, name = 'last_name',default='') 
+    email = models.EmailField(max_length=255, name = 'email',default='')
+    birthday = models.DateField(name = 'birthday', null = True,)
+    nickname = models.CharField(max_length=255,name = 'nickname',default='')
     phone_number = models.CharField(max_length=12,unique=True, name = 'phone_number')
+    profile_image = models.ImageField(upload_to='media', name = 'profile_image',default='media/download.jpg')
 
     # private_chats = models.ForeignKey(PrivateChat,on_delete =models.CASCADE,)
     # group_chats = models.ForeignKey('GroupChat', on_delete = models.CASCADE)
