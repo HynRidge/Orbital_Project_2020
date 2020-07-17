@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     Button loginBtn;
     TextView needAnAcc;
     RequestQueue queue;
-    String url ="http://172.31.120.153:8000/account/api/token/login/";
+    String url ="http://172.31.122.92:8000/account/api/token/login/";
     String accessToken,refreshToken;
 
 

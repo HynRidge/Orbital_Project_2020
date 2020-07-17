@@ -1,4 +1,4 @@
-package com.example.closefriendsapp;
+package com.example.orbital;
 
 import android.os.Build;
 
@@ -27,7 +27,7 @@ public class User {
            int b1Month = Integer.parseInt("" + b1.charAt(3)+ "" + b1.charAt(4));
            int b1Day = Integer.parseInt("" + b1.charAt(0) + "" + b1.charAt(1));
            int b2Month = Integer.parseInt("" + b2.charAt(3)+ "" + b2.charAt(4));
-           int b2Day = Integer.parseInt("" + b1.charAt(0) + "" + b1.charAt(1));
+           int b2Day = b1Day;
            int res = b1Month - b2Month;
            if(res != 0) {
                return res;
