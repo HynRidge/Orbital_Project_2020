@@ -11,43 +11,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Close Friends"
+        android:id="@+id/text_view"
         android:textStyle="bold"
         android:textSize="40sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/nameEt"
-        android:hint="Name"
-        android:background="@drawable/rounded_edittext"
-        android:textSize="20sp"
-        android:padding="5dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-    </EditText>
+        android:layout_marginTop="10dp"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/phoneNumberEt"
         android:hint="Phone Number"
         android:padding="5dp"
-        android:background="@drawable/rounded_edittext"
+        android:background="@drawable/rounded_edit_text"
         android:textSize="20sp"
-        android:layout_below="@+id/nameEt"
+        android:layout_below="@+id/text_view"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-    </EditText>
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="10dp"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/submitButton"
-        android:background="@drawable/rounded_button"
+        android:background="@drawable/rounded_button_white"
         android:padding="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/phoneNumberEt"
         android:textSize="20sp"
-        android:text="Submit"></Button>
+        android:text="Submit"/>
+
 </RelativeLayout>
