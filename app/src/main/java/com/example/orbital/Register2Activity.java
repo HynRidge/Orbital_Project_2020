@@ -41,7 +41,7 @@ public class Register2Activity extends AppCompatActivity {
     EditText enterBirthday, enterNickname;
     Button submitBtn;
     RequestQueue queue;
-    String url = "http://172.31.122.92:8000/account/register/";
+    String url = "http://172.31.120.153:8000/account/register/";
     String firstNameSaved = RegisterActivity.firstNameSaved;
     String lastNameSaved = RegisterActivity.lastNameSaved;
     String emailSaved = RegisterActivity.emailSaved;
@@ -90,20 +90,20 @@ public class Register2Activity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                NetworkResponse response = error.networkResponse;
-                if (error instanceof ServerError && response != null) {
-                    try {
-                        String res = new String(response.data,
-                                HttpHeaderParser.parseCharset(response.headers, "utf-8"));
-                        // Now you can use any deserializer to make sense of data
-                        JSONObject obj = new JSONObject(res);
-                    } catch (UnsupportedEncodingException | JSONException e1) {
-                        // Couldn't properly decode data to string
-                        e1.printStackTrace();
-                    } // returned data is not JSONObject?
-
-                }
-//                Log.d("Failed", error.toString());
+//                NetworkResponse response = error.networkResponse;
+//                if (error instanceof ServerError && response != null) {
+//                    try {
+//                        String res = new String(response.data,
+//                                HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+//                        // Now you can use any deserializer to make sense of data
+//                        JSONObject obj = new JSONObject(res);
+//                    } catch (UnsupportedEncodingException | JSONException e1) {
+//                        // Couldn't properly decode data to string
+//                        e1.printStackTrace();
+//                    } // returned data is not JSONObject?
+//
+//                }
+                Log.d("Failed", error.toString());
             }
         })
         {
