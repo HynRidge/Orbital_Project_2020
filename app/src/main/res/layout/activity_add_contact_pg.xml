@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".AddContactPg">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Close Friends"
+        android:textStyle="bold"
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameEt"
+        android:hint="Name"
+        android:background="@drawable/rounded_edittext"
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+    </EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneNumberEt"
+        android:hint="Phone Number"
+        android:padding="5dp"
+        android:background="@drawable/rounded_edittext"
+        android:textSize="20sp"
+        android:layout_below="@+id/nameEt"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+    </EditText>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/submitButton"
+        android:background="@drawable/rounded_button"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/phoneNumberEt"
+        android:textSize="20sp"
+        android:text="Submit"></Button>
+</RelativeLayout>
