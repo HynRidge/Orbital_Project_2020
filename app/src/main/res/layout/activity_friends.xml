@@ -35,11 +35,12 @@
 
         <Button
             android:id="@+id/add_friends_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="Add Friends"></Button>
+            android:text="Add Friends"
+            android:background="@drawable/add_friends"></Button>
     </RelativeLayout>
 
     <TextView
@@ -107,4 +108,15 @@
         android:hint="Change Your Status"
         android:maxLines="5"
         android:layout_below="@id/changeStatusTv" />
+    <Button
+        android:id="@+id/saveChangesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/UpdateStatusEt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Save"
+        android:background="@drawable/rounded_button"
 </RelativeLayout>
