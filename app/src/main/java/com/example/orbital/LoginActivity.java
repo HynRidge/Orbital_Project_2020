@@ -36,8 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView needAnAcc;
     RequestQueue queue;
     String USER_PHONE_NUMBER;
-    String LOGIN_URL ="http://172.31.120.153:8000/account/api/token/login/";
-    String BASE_URL = "http://172.31.120.153:8000/account/";
+    String LOGIN_URL ="http://172.31.123.95/account/api/token/login/";
+    String BASE_URL = "http://172.31.123.95:8000/account/";
     public static int USER_ID;
     String accessToken,refreshToken;
 
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(response);
                     jo = jsonArray.getJSONObject(0);
                     USER_ID = jo.getInt("id");
-                    System.out.println(USER_ID);
+//                    System.out.println(USER_ID);
                     sendUserToMainActivity();
                 } catch (JSONException e) {
                     e.printStackTrace();
