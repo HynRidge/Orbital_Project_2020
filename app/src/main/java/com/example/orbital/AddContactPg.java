@@ -11,16 +11,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class AddContactPg extends AppCompatActivity {
 
@@ -32,6 +37,8 @@ public class AddContactPg extends AppCompatActivity {
 
     int CURRENT_USER_ID =LoginActivity.USER_ID;
 
+    RequestQueue queue;
+
     int NEW_CONTACT_ID;
 
     @Override
@@ -40,6 +47,7 @@ public class AddContactPg extends AppCompatActivity {
         setContentView(R.layout.activity_add_contact_pg);
         initialize();
 
+        queue = Volley.newRequestQueue(getApplicationContext());
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,14 +86,33 @@ public class AddContactPg extends AppCompatActivity {
                 Toast.makeText(AddContactPg.this, "Server response has failed, try again", Toast.LENGTH_SHORT).show();
             }
         });
+
+        queue.add(stringRequest);
     }
 
     private void updateContactDatabase() {
-        String url = BASE_URL + "get-contact/" + CURRENT_USER_ID;
-    }
+        String url = BASE_URL + "contact/";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(AddContactPg.this, "Contact has been added", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(AddContactPg.this, "Response failure,please try again", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("current_user_id",Integer.toString(CURRENT_USER_ID));
+                params.put("contact",Integer.toString(NEW_CONTACT_ID));
+                return params;
+            }
+        };
 
-    private void processResponse(String response) throws JSONException {
-        JSONArray jsonArray = new JSONArray(response);
+        queue.add(stringRequest);
     }
 
     private void initialize() {
