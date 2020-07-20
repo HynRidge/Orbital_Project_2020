@@ -6,28 +6,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffc72b"
+    android:background="@color/colorPrimary"
     tools:context=".Friends">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/close_friends_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="69dp"
+            android:layout_marginLeft="69dp"
+            android:layout_marginTop="0dp"
+            android:text="CloseFriends"
+            android:textSize="40sp"></TextView>
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/back_button"></Button>
+
+        <Button
+            android:id="@+id/add_friends_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="Add Friends"
+            android:background="@drawable/add_friends"></Button>
+    </RelativeLayout>
+
     <TextView
-        android:id="@+id/close_friends_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CloseFriends"
+        android:id="@+id/change_profile_pic_tv"
+        android:text="Change Your Profile Pic"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
         android:textSize="40sp">
     </TextView>
-    <Button
-        android:id="@+id/add_friends_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:text="Add Friends">
-    </Button>
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:id="@+id/profile_pic_iv"
+        android:layout_below="@+id/change_profile_pic_tv"
+        app:srcCompat="@drawable/profile_pic"
+        android:layout_centerHorizontal="true"
+        tools:ignore="VectorDrawableCompat">
+    </ImageView>
     <TextView
         android:id="@+id/changeNicknameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/close_friends_tv"
+        android:layout_below="@+id/profile_pic_iv"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="30dp"
@@ -41,7 +79,7 @@
         android:id="@+id/changeNicknameEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edit_text"
+        android:background="@drawable/rounded_edittext"
         android:layout_margin="10dp"
         android:padding="15dp"
         android:hint="Enter Your New Nickname"
@@ -64,10 +102,21 @@
         android:id="@+id/UpdateStatusEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edit_text"
+        android:background="@drawable/rounded_edittext"
         android:layout_margin="10dp"
         android:padding="15dp"
         android:hint="Change Your Status"
         android:maxLines="5"
         android:layout_below="@id/changeStatusTv" />
+    <Button
+        android:id="@+id/saveChangesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/UpdateStatusEt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Save"
+        android:background="@drawable/rounded_button"
 </RelativeLayout>
