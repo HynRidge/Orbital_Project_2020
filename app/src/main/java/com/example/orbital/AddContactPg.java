@@ -51,8 +51,7 @@ public class AddContactPg extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!PhoneNumberUtils.isGlobalPhoneNumber(String.valueOf(phoneNumberEt)) ||
-                phoneNumberEt.getText().toString().isEmpty()) {
+                if (phoneNumberEt.getText().toString().isEmpty()) {
                     phoneNumberEt.setError("Please enter a valid phone number");
                     phoneNumberEt.requestFocus();
                 }
