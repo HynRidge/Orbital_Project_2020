@@ -94,5 +94,8 @@ class Contact(models.Model):
     current_user_id= models.IntegerField(name = 'current_user_id')
     contact = models.ForeignKey(RegisterUser,on_delete = models.CASCADE)
 
+    class Meta:
+        unique_together = ('current_user_id','contact')
+
     #current_user --> current_user_id(cache di frontend, upon login (cache idnya))
     #contact -->  registeruser_id()
