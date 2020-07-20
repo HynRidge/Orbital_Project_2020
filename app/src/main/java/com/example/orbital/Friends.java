@@ -1,4 +1,4 @@
-package com.example.closefriendsapp;
+package com.example.orbital;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,7 +15,6 @@ public class Friends extends AppCompatActivity {
 
     Button backButton,saveChangesButton;
 
-    ImageView profilePic;
 
     EditText nicknameEt, statusEt;
 
@@ -67,23 +66,6 @@ public class Friends extends AppCompatActivity {
             }
         });
 
-        profilePic = (ImageView) findViewById(R.id.profile_pic_iv);
-
-        profilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent galleryIntent = new Intent();
-
-                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-
-                galleryIntent.setType("image/*");
-
-                int GalleryPick = 1;
-
-                startActivityForResult(galleryIntent,GalleryPick);
-            }
-        });
         nicknameEt = (EditText) findViewById(R.id.changeNicknameEt);
 
         statusEt = (EditText) findViewById(R.id.UpdateStatusEt);
