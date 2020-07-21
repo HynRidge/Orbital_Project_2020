@@ -3,12 +3,12 @@ package com.example.orbital.Model;
 public class ContactModel {
     String contact_name;
     int contact_id;
-    String image_path;
+    int image;
 
-    public ContactModel(String contact_name, int contact_id, String image_path) {
+    public ContactModel(String contact_name, int contact_id, int image) {
         this.contact_name = contact_name;
         this.contact_id = contact_id;
-        this.image_path = image_path;
+        this.image = image;
     }
 
     public String getContact_name() {
@@ -27,11 +27,11 @@ public class ContactModel {
         this.contact_id = contact_id;
     }
 
-    public String getImage_path() {
-        return image_path;
+    public int getImage() {
+        return image;
     }
 
-    public void setImage_path(String image_path) {
-        this.image_path = image_path;
+    public void setImage(int image) {
+        this.image = image;
     }
 }
