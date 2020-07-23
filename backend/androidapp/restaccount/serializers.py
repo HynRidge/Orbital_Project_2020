@@ -186,3 +186,12 @@ class GetContactWithCurrentUser(ModelSerializer):
         fields = [
             'contact'
         ]
+    
+
+class GetNickname(ModelSerializer):
+    class Meta:
+        model = RegisterUser
+        fields = [
+            'nickname',
+        ]
+        lookup_field = 'id'

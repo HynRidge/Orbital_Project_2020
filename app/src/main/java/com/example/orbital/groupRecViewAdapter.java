@@ -38,6 +38,7 @@ public class groupRecViewAdapter extends RecyclerView.Adapter<groupRecViewAdapte
 
     public void setGroups(ArrayList<groupModel> groups) {
         this.groups = groups;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

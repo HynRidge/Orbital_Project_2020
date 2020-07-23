@@ -5,10 +5,10 @@ from restaccount.models import RegisterUser,Message,Room,Participants,Contact
 # Login
 from restaccount.serializers import RegisterSerializers,LoginSerializer,AddMessageSerializer,AddRoomSerializer
 from restaccount.serializers import AddParticipantsSerializer,listRegisteredUserSerializer,GetMessageSerializer
-from restaccount.serializers import AddContactSerializer,GetContactWithCurrentUser
+from restaccount.serializers import AddContactSerializer,GetContactWithCurrentUser,GetNickname
 # LoginSerializers
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.generics import CreateAPIView,ListAPIView
+from rest_framework.generics import CreateAPIView,ListAPIView,RetrieveAPIView
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -47,7 +47,6 @@ class RegisteredUserListView(ListAPIView):
 
 class RegisterUserByPhoneNumberView(ListAPIView):
     serializer_class=listRegisteredUserSerializer
-    
 
     def get_queryset(self):
         phone_number = self.kwargs['phone_number']
@@ -76,3 +75,11 @@ class GetContactView(ListAPIView):
         current_user_id = self.kwargs['current_user_id']
 
         return Contact.objects.filter(current_user_id = current_user_id) 
+
+class GetNicknameView(RetrieveAPIView):
+    serializer_class = GetNickname
+    lookup_field = 'id'
+    
+    def get_queryset(self):
+        user_id = self.kwargs['id']
+        return RegisterUser.objects.filter(pk = user_id)
