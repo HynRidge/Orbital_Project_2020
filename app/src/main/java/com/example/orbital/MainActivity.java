@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     TabsAccessorAdapter tabsAccessorAdapter;
     private static Context context;
 
-    FloatingActionButton add_contat_btn;
+    FloatingActionButton add_contact_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         initialize();
 
-        add_contat_btn.setOnClickListener(new View.OnClickListener() {
+        add_contact_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendUserToAddContactPage();
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public void initialize() {
         MainActivity.context = getApplicationContext();
 
-        add_contat_btn = findViewById(R.id.add_contact_button);
+        add_contact_btn = findViewById(R.id.add_contact_button);
 
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
