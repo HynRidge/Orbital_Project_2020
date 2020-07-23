@@ -1,5 +1,6 @@
 package com.example.orbital;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
 
     ArrayList<ContactModel> contacts = new ArrayList<>();
 
+    Context mContext;
+
     public contactRecViewAdapter() {}
 
 
@@ -30,9 +33,9 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         holder.contact_name.setText(contacts.get(position).getContact_name());
-        //Need t
-//        holder.contact_profile_image.setImageResource(contacts.get(position).getImage_path());
+        holder.contact_profile_image.setImageResource(contacts.get(position).getImage());
     }
 
     @Override
@@ -40,8 +43,9 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
         return this.contacts.size();
     }
 
-    public void setContacts(ArrayList<ContactModel> contacts) {
+    public void setContacts(ArrayList<ContactModel> contacts, Context mContext) {
         this.contacts = contacts;
+        this.mContext = mContext;
         notifyDataSetChanged();
     }
 
