@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,19 +29,26 @@ import java.util.List;
 
 public class MessageActivity extends AppCompatActivity {
 
-    private Toolbar chatToolBar;
+    Toolbar chatToolBar;
 
-    private RecyclerView recyclerView;
+    RecyclerView recyclerView;
 
-    private TextView nickname;
+    TextView nickname;
 
-    private ImageView profileImage;
+    ImageView profileImage;
 
     EditText edit_message;
 
-    private Button sendButton;
+    Button sendButton;
 
     private MessageAdapter messageAdapter;
+
+    Intent intent;
+
+    int CURRENT_USER_ID = LoginActivity.USER_ID;
+    int CONTACT_ID;
+    String CONTACT_NICKNAME;
+    int CONTACT_IMG;
 
 
     @Override
@@ -51,33 +59,51 @@ public class MessageActivity extends AppCompatActivity {
 
         initialize();
 
+        intent = getIntent();
+        CONTACT_ID = intent.getIntExtra("contactId",0);
+        CONTACT_NICKNAME = intent.getStringExtra("contactNickname");
+        CONTACT_IMG = intent.getIntExtra("contactImage", R.drawable.defaultpic);
+
+        nickname.setText(CONTACT_NICKNAME);
+        profileImage.setImageResource(CONTACT_IMG);
+
     }
 
-    @SuppressLint("RestrictedApi")
     private void initialize() {
 
-        chatToolBar = findViewById(R.id.chat_toolbar);
+        chatToolBar = findViewById(R.id.toolbar);
 
         setSupportActionBar(chatToolBar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        chatToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDefaultDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowCustomEnabled(true);
 
-        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View actionBarView = layoutInflater.inflate(R.layout.toolbar,null);
-        actionBar.setCustomView(actionBarView);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDefaultDisplayHomeAsUpEnabled(true);
+//        actionBar.setDisplayShowCustomEnabled(true);
+
+//        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View actionBarView = layoutInflater.inflate(R.layout.toolbar,null);
+//        actionBar.setCustomView(actionBarView);
 
 
-        recyclerView = findViewById(R.id.message_recycler_view);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        linearLayoutManager.setStackFromEnd(true);
+//        recyclerView = findViewById(R.id.message_recycler_view);
+//        recyclerView.setHasFixedSize(true);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+//        linearLayoutManager.setStackFromEnd(true);
 
         nickname = findViewById(R.id.username);
 
         profileImage = findViewById(R.id.custom_profile_image);
 
-        sendButton = findViewById(R.id.send_button);
+//        sendButton = findViewById(R.id.send_button);
+
+//        edit_message = findViewById(R.id.edit_message);
     }
 }
