@@ -33,7 +33,7 @@ public class AddContactPg extends AppCompatActivity {
 
     Button submitButton;
 
-    String BASE_URL = " http://172.31.122.92:8000/account/";
+    String BASE_URL = " http://172.31.123.43:8000/account/";
 
     int CURRENT_USER_ID =LoginActivity.USER_ID;
 
@@ -94,7 +94,9 @@ public class AddContactPg extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                System.out.println("Contact added 1.0 succeeded");
                 Toast.makeText(AddContactPg.this, "Contact has been added", Toast.LENGTH_SHORT).show();
+                updateContactDatabase2();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -107,6 +109,33 @@ public class AddContactPg extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("current_user_id",Integer.toString(CURRENT_USER_ID));
                 params.put("contact",Integer.toString(NEW_CONTACT_ID));
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
+    }
+
+    private void updateContactDatabase2() {
+        String url = BASE_URL + "contact/";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println("contact added 2.0 succeed");
+                Toast.makeText(AddContactPg.this, "Contact has been added", Toast.LENGTH_SHORT).show();
+                updateContactDatabase2();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(AddContactPg.this, "Response failure,please try again", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("current_user_id",Integer.toString(NEW_CONTACT_ID));
+                params.put("contact",Integer.toString(CURRENT_USER_ID));
                 return params;
             }
         };
