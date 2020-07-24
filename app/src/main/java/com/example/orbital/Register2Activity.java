@@ -41,7 +41,7 @@ public class Register2Activity extends AppCompatActivity {
     EditText enterBirthday, enterNickname;
     Button submitBtn;
     RequestQueue queue;
-    String url = "http://172.31.122.92:8000/account/register/";
+    String url = "http://172.31.123.43:8000/account/register/";
     String firstNameSaved = RegisterActivity.firstNameSaved;
     String lastNameSaved = RegisterActivity.lastNameSaved;
     String emailSaved = RegisterActivity.emailSaved;
@@ -74,8 +74,8 @@ public class Register2Activity extends AppCompatActivity {
         });
 }
 
-    private void sendUserToMainActivity() {
-        Intent activity = new Intent(getApplicationContext(), MainActivity.class);
+    private void sendUserToLoginActivity() {
+        Intent activity = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(activity);
     }
 
@@ -85,7 +85,7 @@ public class Register2Activity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d("Response", response);
                 processRegisterResponse(response);
-                sendUserToMainActivity();
+                sendUserToLoginActivity();
             }
         }, new Response.ErrorListener() {
             @Override
