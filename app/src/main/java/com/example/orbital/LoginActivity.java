@@ -36,8 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView needAnAcc;
     RequestQueue queue;
     String USER_PHONE_NUMBER;
-    String LOGIN_URL ="http://172.31.122.113:8000/account/api/token/login/";
-    String BASE_URL = "http://172.31.122.113:8000/account/";
+    String LOGIN_URL ="http://172.31.123.43:8000/account/api/token/login/";
+    String BASE_URL = "http://172.31.123.43:8000/account/";
     public static int USER_ID;
     String accessToken,refreshToken;
 
