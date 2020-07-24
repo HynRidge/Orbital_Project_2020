@@ -29,7 +29,7 @@ import java.util.Objects;
 
 public class ContactsFragment extends Fragment {
 
-    String BASE_URL = "http://172.31.122.113:8000/account/";
+    String BASE_URL = "http://172.31.123.43:8000/account/";
 
     RequestQueue queue;
 
@@ -83,7 +83,6 @@ public class ContactsFragment extends Fragment {
             public void onResponse(String response) {
                 System.out.println("get current user contact succeed");
                 try {
-                    System.out.println("JANCOK");
                     JSONArray jsonArray = new JSONArray(response);
                     for(int i = 0 ; i < jsonArray.length() ; i++) {
                         JSONObject jo = jsonArray.getJSONObject(i);
@@ -106,7 +105,7 @@ public class ContactsFragment extends Fragment {
 
     private void getContactNickname() {
         contacts.clear();
-        for(int contactID : contactsID) {
+        for(final int contactID : contactsID) {
             String url = BASE_URL + "get-nickname/" + contactID +"/";
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
@@ -115,9 +114,9 @@ public class ContactsFragment extends Fragment {
                     try{
                         JSONObject jsonObject = new JSONObject(response);
                         if(jsonObject.getString("nickname").equals("")) {
-                            contacts.add(new ContactModel("Anonymous User",R.drawable.defaultpic));
+                            contacts.add(new ContactModel("Anonymous User",R.drawable.defaultpic,contactID));
                         } else {
-                            contacts.add(new ContactModel(jsonObject.getString("nickname"),R.drawable.defaultpic));
+                            contacts.add(new ContactModel(jsonObject.getString("nickname"),R.drawable.defaultpic,contactID));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
