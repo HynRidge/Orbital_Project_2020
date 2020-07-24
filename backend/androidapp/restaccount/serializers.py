@@ -195,3 +195,10 @@ class GetNickname(ModelSerializer):
             'nickname',
         ]
         lookup_field = 'id'
+
+class GetRoom(ModelSerializer):
+    class Meta:
+        model = Participants
+        fields =[
+            'room',
+        ]

@@ -22,6 +22,7 @@ urlpatterns =[
 
     path('participants/',views.AddParticipantsView.as_view(), name = 'add_participants'),
     path('list-participants/',views.ParticipantsListView.as_view(),name = 'list_participants'),
+    url(r'^find-room/(?P<current_user_id>[\w-]+)/(?P<contact_id>[\w-]+)/$', views.GetRoomView.as_view(),name = 'find_room_by_users_id'),
 
     path('contact/',views.AddContactView.as_view(),name = 'add_contact'),
     url(r'^get-contact/(?P<current_user_id>[\w-]+)/$',views.GetContactView.as_view(),name = 'get_contact_with_current_user'),

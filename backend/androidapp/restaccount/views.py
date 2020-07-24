@@ -5,7 +5,7 @@ from restaccount.models import RegisterUser,Message,Room,Participants,Contact
 # Login
 from restaccount.serializers import RegisterSerializers,LoginSerializer,AddMessageSerializer,AddRoomSerializer
 from restaccount.serializers import AddParticipantsSerializer,listRegisteredUserSerializer,GetMessageSerializer
-from restaccount.serializers import AddContactSerializer,GetContactWithCurrentUser,GetNickname
+from restaccount.serializers import AddContactSerializer,GetContactWithCurrentUser,GetNickname,GetRoom
 # LoginSerializers
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.generics import CreateAPIView,ListAPIView,RetrieveAPIView
@@ -83,3 +83,12 @@ class GetNicknameView(RetrieveAPIView):
     def get_queryset(self):
         user_id = self.kwargs['id']
         return RegisterUser.objects.filter(pk = user_id)
+
+class GetRoomView(ListAPIView):
+    serializer_class = GetRoom
+
+    def get_queryset(self):
+        current_user_id = self.kwargs['current_user_id']
+        contact_id = self.kwargs['contact_id']
+
+        return Participants.objects.filter(user = current_user_id) and Participants.objects.filter(user = contact_id)
