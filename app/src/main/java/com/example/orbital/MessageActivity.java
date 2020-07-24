@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,7 +40,7 @@ public class MessageActivity extends AppCompatActivity {
 
     EditText edit_message;
 
-    Button sendButton;
+    ImageButton sendButton;
 
     private MessageAdapter messageAdapter;
 
@@ -59,13 +60,7 @@ public class MessageActivity extends AppCompatActivity {
 
         initialize();
 
-        intent = getIntent();
-        CONTACT_ID = intent.getIntExtra("contactId",0);
-        CONTACT_NICKNAME = intent.getStringExtra("contactNickname");
-        CONTACT_IMG = intent.getIntExtra("contactImage", R.drawable.defaultpic);
 
-        nickname.setText(CONTACT_NICKNAME);
-        profileImage.setImageResource(CONTACT_IMG);
 
     }
 
@@ -93,17 +88,24 @@ public class MessageActivity extends AppCompatActivity {
 //        actionBar.setCustomView(actionBarView);
 
 
-//        recyclerView = findViewById(R.id.message_recycler_view);
-//        recyclerView.setHasFixedSize(true);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        linearLayoutManager.setStackFromEnd(true);
+        recyclerView = findViewById(R.id.message_rec_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         nickname = findViewById(R.id.username);
-
         profileImage = findViewById(R.id.custom_profile_image);
+        sendButton = findViewById(R.id.send_button);
+        edit_message = findViewById(R.id.text_send);
 
-//        sendButton = findViewById(R.id.send_button);
 
-//        edit_message = findViewById(R.id.edit_message);
+        intent = getIntent();
+        CONTACT_ID = intent.getIntExtra("contactId",0);
+        CONTACT_NICKNAME = intent.getStringExtra("contactNickname");
+        CONTACT_IMG = intent.getIntExtra("contactImage", R.drawable.defaultpic);
+
+        nickname.setText(CONTACT_NICKNAME);
+        profileImage.setImageResource(CONTACT_IMG);
     }
 }
