@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -29,7 +30,7 @@ import java.util.Objects;
 
 public class ContactsFragment extends Fragment {
 
-    String BASE_URL = "http://172.31.123.43:8000/account/";
+    String BASE_URL = "http://172.31.123.95/account/";
 
     RequestQueue queue;
 
@@ -59,17 +60,12 @@ public class ContactsFragment extends Fragment {
         contactRecView = view.findViewById(R.id.contactRecView);
         contactRecView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        requestForCurrentUserContact();
-
-
         adapter.setContacts(contacts,getContext());
-
         adapter.notifyDataSetChanged();
 
         contactRecView.setAdapter(adapter);
 
-
-
+        requestForCurrentUserContact();
 
 
         return view;
@@ -97,9 +93,25 @@ public class ContactsFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "Get Contact failed, please try again!!", Toast.LENGTH_SHORT).show();
+                System.out.println(error.toString());
             }
         });
+        stringRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
 
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
         queue.add(stringRequest);
     }
 
@@ -126,12 +138,27 @@ public class ContactsFragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(getContext(), "Get Nickname failed, try again!!", Toast.LENGTH_SHORT).show();
+                    System.out.println(error.toString());
                 }
             });
-//            System.out.println(contactName.get(0));
+            stringRequest.setRetryPolicy(new RetryPolicy() {
+                @Override
+                public int getCurrentTimeout() {
+                    return 50000;
+                }
+
+                @Override
+                public int getCurrentRetryCount() {
+                    return 50000;
+                }
+
+                @Override
+                public void retry(VolleyError error) throws VolleyError {
+
+                }
+            });
             queue.add(stringRequest);
         }
-
     }
 
 }
