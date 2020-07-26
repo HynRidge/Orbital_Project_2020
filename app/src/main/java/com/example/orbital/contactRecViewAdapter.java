@@ -37,7 +37,7 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
 
     Context mContext;
 
-    String BASE_URL = "http://172.31.123.43:8000/account/";
+    String BASE_URL = "http://172.31.123.95:8000/account/";
     int CURRENT_USER_ID = LoginActivity.USER_ID;
     int PRIVATE_CHAT = 1;
 
@@ -172,7 +172,6 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
     public void setContacts(ArrayList<ContactModel> contacts, Context mContext) {
         this.contacts = contacts;
         this.mContext = mContext;
-        notifyDataSetChanged();
     }
 
 
