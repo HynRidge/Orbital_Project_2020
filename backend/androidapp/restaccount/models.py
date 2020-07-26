@@ -53,7 +53,6 @@ class RegisterUser(AbstractBaseUser, PermissionsMixin):
     birthday = models.DateField(name = 'birthday', null = True,)
     nickname = models.CharField(max_length=255,name = 'nickname',default='')
     phone_number = models.CharField(max_length=12,unique=True, name = 'phone_number')
-    profile_image = models.ImageField(upload_to='media', name = 'profile_image',default='media/download.jpg')
 
     # private_chats = models.ForeignKey(PrivateChat,on_delete =models.CASCADE,)
     # group_chats = models.ForeignKey('GroupChat', on_delete = models.CASCADE)
