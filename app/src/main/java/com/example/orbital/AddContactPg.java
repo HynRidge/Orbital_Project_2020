@@ -33,7 +33,7 @@ public class AddContactPg extends AppCompatActivity {
 
     Button submitButton;
 
-    String BASE_URL = " http://172.31.123.43:8000/account/";
+    String BASE_URL = " http://172.31.123.95:8000/account/";
 
     int CURRENT_USER_ID =LoginActivity.USER_ID;
 
