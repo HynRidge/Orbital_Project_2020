@@ -112,17 +112,20 @@ class AddMessageSerializer(ModelSerializer):
         fields = [
             'id',
             'room',
-            'user',
+            'sender_user',
+            'receiver_user',
             'message',
         ]
     def create(self,validated_data):
         message = validated_data['message']
         room = validated_data['room']
-        user = validated_data['user']
+        sender_user = validated_data['sender_user']
+        receiver_user = validated_data['receiver_user']
         msg_obj = Message(
             message = message,
             room = room,
-            user = user,
+            sender_user = sender_user,
+            receiver_user = receiver_user
         )
         msg_obj.save()
         return msg_obj
@@ -157,6 +160,8 @@ class GetMessageSerializer(ModelSerializer):
         model = Message
         fields = [
             'message',
+            'sender_user',
+            'receiver_user'
         ]
 
 

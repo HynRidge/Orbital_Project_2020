@@ -86,7 +86,8 @@ class Participants(models.Model):
 
 class Message(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    user = models.ForeignKey(RegisterUser,on_delete=models.CASCADE)
+    sender_user = models.ForeignKey(RegisterUser,on_delete=models.CASCADE,related_name='sender_user')
+    receiver_user = models.ForeignKey(RegisterUser,on_delete = models.CASCADE,related_name='receiver_user')
     message = models.TextField(name = 'message')
 
 class Contact(models.Model):

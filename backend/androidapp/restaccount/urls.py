@@ -19,7 +19,7 @@ urlpatterns =[
 
 
     path('add-message/',views.AddMessageView.as_view(),name ='add_message'),
-    url(r'^get-message/(?P<room_id>[\w-]+)/(?P<user_id>[\w-]+)/$',views.GetMessageView.as_view(),name = 'get_message'),
+    url(r'^get-message/(?P<room_id>[\w-]+)/$',views.GetMessageView.as_view(),name = 'get_message'),
 
     path('participants/',views.AddParticipantsView.as_view(), name = 'add_participants'),
     path('list-participants/',views.ParticipantsListView.as_view(),name = 'list_participants'),

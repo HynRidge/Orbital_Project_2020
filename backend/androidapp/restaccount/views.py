@@ -59,9 +59,10 @@ class GetMessageView(ListAPIView):
 
     def get_queryset(self):
         room_id = self.kwargs['room_id']
-        user_id = self.kwargs['user_id']
+        # user_id = self.kwargs['user_id']
+        # receiver_id = self.kwargs['receiver_id']
 
-        return Message.objects.filter(room = room_id, user = user_id)
+        return Message.objects.filter(room= room_id)
 
 
 class AddContactView(CreateAPIView):
