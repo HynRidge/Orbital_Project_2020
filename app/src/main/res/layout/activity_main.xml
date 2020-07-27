@@ -39,14 +39,28 @@
         android:layout_width="79dp"
         android:layout_height="79dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         app:borderWidth="0dp"
         app:elevation="6dp"
         android:clickable="true"
         android:background="@drawable/rounded_button"
         app:fabSize="normal"
-        android:src="@drawable/add"
+        android:src="@drawable/add_friends"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="20dp"
         android:focusable="true" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/change_nickname_btn"
+        android:layout_above="@+id/add_contact_button"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:background="@drawable/rounded_button"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        android:src="@drawable/add_nickname"
+        android:layout_width="79dp"
+        android:layout_height="79dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"/>
 </RelativeLayout>
