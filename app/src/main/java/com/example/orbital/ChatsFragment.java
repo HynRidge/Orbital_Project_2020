@@ -33,9 +33,6 @@ public class ChatsFragment extends Fragment {
         //Creating data manually
         ArrayList<chatModel> chats = new ArrayList<>();
 
-        chats.add(new chatModel("Heinrich",R.drawable.defaultpic, "Hi..."));
-        chats.add(new chatModel("Heinrich",R.drawable.defaultpic, "Hello..."));
-
         chatRecViewAdapter adapter = new chatRecViewAdapter();
         adapter.setChat(chats);
 
