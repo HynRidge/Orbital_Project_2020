@@ -5,10 +5,10 @@ from restaccount.models import RegisterUser,Message,Room,Participants,Contact
 # Login
 from restaccount.serializers import RegisterSerializers,LoginSerializer,AddMessageSerializer,AddRoomSerializer
 from restaccount.serializers import AddParticipantsSerializer,listRegisteredUserSerializer,GetMessageSerializer
-from restaccount.serializers import AddContactSerializer,GetContactWithCurrentUser,GetNickname,GetRoom
+from restaccount.serializers import AddContactSerializer,GetContactWithCurrentUser,GetNickname,GetRoom,ChangeNickname
 # LoginSerializers
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.generics import CreateAPIView,ListAPIView,RetrieveAPIView
+from rest_framework.generics import CreateAPIView,ListAPIView,RetrieveAPIView,UpdateAPIView
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -92,3 +92,14 @@ class GetRoomView(ListAPIView):
         contact_id = self.kwargs['contact_id']
 
         return Participants.objects.filter(user = current_user_id) and Participants.objects.filter(user = contact_id)
+
+class UpdateNicknameView(UpdateAPIView):
+    serializer_class = ChangeNickname
+    queryset = RegisterUser.objects.all()
+    lookup_field = 'id'
+
+    # def update(self,request):
+    #     instance = self.get_object()
+    #     instance.nickname = request.data.get("nickname")
+    #     instance.save()
+    #     return instance

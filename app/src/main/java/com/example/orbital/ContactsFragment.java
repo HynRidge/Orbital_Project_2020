@@ -60,10 +60,9 @@ public class ContactsFragment extends Fragment {
         contactRecView = view.findViewById(R.id.contactRecView);
         contactRecView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter.setContacts(contacts,getContext());
-        adapter.notifyDataSetChanged();
 
-        contactRecView.setAdapter(adapter);
+
+
 
         requestForCurrentUserContact();
 
@@ -96,22 +95,22 @@ public class ContactsFragment extends Fragment {
                 System.out.println(error.toString());
             }
         });
-        stringRequest.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 50000;
-            }
-
-            @Override
-            public int getCurrentRetryCount() {
-                return 50000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
-
-            }
-        });
+//        stringRequest.setRetryPolicy(new RetryPolicy() {
+//            @Override
+//            public int getCurrentTimeout() {
+//                return 50000;
+//            }
+//
+//            @Override
+//            public int getCurrentRetryCount() {
+//                return 50000;
+//            }
+//
+//            @Override
+//            public void retry(VolleyError error) throws VolleyError {
+//
+//            }
+//        });
         queue.add(stringRequest);
     }
 
@@ -130,6 +129,10 @@ public class ContactsFragment extends Fragment {
                         } else {
                             contacts.add(new ContactModel(jsonObject.getString("nickname"),R.drawable.defaultpic,contactID));
                         }
+                        adapter.setContacts(contacts,getContext());
+                        adapter.notifyDataSetChanged();
+                        contactRecView.setAdapter(adapter);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -141,22 +144,22 @@ public class ContactsFragment extends Fragment {
                     System.out.println(error.toString());
                 }
             });
-            stringRequest.setRetryPolicy(new RetryPolicy() {
-                @Override
-                public int getCurrentTimeout() {
-                    return 50000;
-                }
-
-                @Override
-                public int getCurrentRetryCount() {
-                    return 50000;
-                }
-
-                @Override
-                public void retry(VolleyError error) throws VolleyError {
-
-                }
-            });
+//            stringRequest.setRetryPolicy(new RetryPolicy() {
+//                @Override
+//                public int getCurrentTimeout() {
+//                    return 50000;
+//                }
+//
+//                @Override
+//                public int getCurrentRetryCount() {
+//                    return 50000;
+//                }
+//
+//                @Override
+//                public void retry(VolleyError error) throws VolleyError {
+//
+//                }
+//            });
             queue.add(stringRequest);
         }
     }

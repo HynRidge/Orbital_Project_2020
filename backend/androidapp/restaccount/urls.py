@@ -13,6 +13,7 @@ urlpatterns =[
     path('registered-user/',views.RegisteredUserListView.as_view(),name = 'registered_user'),
     url(r'^register-by-phone-number/(?P<phone_number>[\w-]+)/$',views.RegisterUserByPhoneNumberView.as_view(),name='registered_by_phone_number'),
     url(r"^get-nickname/(?P<id>[\w-]+)/$",views.GetNicknameView.as_view(),name = 'get-nickname'),
+    url(r'^change-nickname/(?P<id>[\w-]+)/$',views.UpdateNicknameView.as_view(),name = 'change-nickname'),
 
     path('room/',views.AddRoomView.as_view(), name = 'add_room'),
 

@@ -202,3 +202,16 @@ class GetRoom(ModelSerializer):
         fields =[
             'room',
         ]
+
+class ChangeNickname(ModelSerializer):
+    class Meta:
+        model = RegisterUser
+        fields = [
+            'nickname',
+        ]
+
+    def update(self, instance,validated_data):
+        instance.nickname = validated_data.get('nickname',instance.nickname)
+        instance.save()
+        return instance
+    
