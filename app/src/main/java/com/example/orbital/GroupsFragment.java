@@ -30,8 +30,6 @@ public class GroupsFragment extends Fragment {
 
         ArrayList<groupModel> groups = new ArrayList<>();
 
-        groups.add(new groupModel("NUS Orbital",R.drawable.orbital));
-        groups.add(new groupModel("NUS",R.drawable.nus));
 
         groupRecViewAdapter adapter = new groupRecViewAdapter();
         adapter.setGroups(groups);
