@@ -34,7 +34,7 @@
             android:id="@+id/chat_body">
 
             <TextView
-                android:id="@+id/sender_chat"
+                android:id="@+id/show_message_current_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Chat Content"
