@@ -1,6 +1,7 @@
 package com.example.orbital;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,12 +12,26 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Friends extends AppCompatActivity {
 
-    Button backButton,saveChangesButton;
+    Button saveChangesButton;
+    EditText nicknameEt;
 
+    int CURRENT_USER_ID= LoginActivity.USER_ID;
+    String BASE_URL = " http://172.31.123.95:8000/account/";
 
-    EditText nicknameEt, statusEt;
+    RequestQueue queue ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,49 +40,54 @@ public class Friends extends AppCompatActivity {
 
         setContentView(R.layout.activity_friends);
 
-        backButton = (Button) findViewById(R.id.backButton);
+        initialize();
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-                startActivity(intent);
-
-                finish();
-            }
-        });
-        saveChangesButton = (Button) findViewById(R.id.saveChangesButton);
+        queue =  Volley.newRequestQueue(getApplicationContext());
 
         saveChangesButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                if(TextUtils.isEmpty((CharSequence) nicknameEt)) {
+                if(nicknameEt.getText().toString().isEmpty()) {
 
                     Toast.makeText(getApplicationContext(),"Please Enter A Nickname first",Toast.LENGTH_SHORT).show();
 
                     return;
                 }
-                if(TextUtils.isEmpty((CharSequence) statusEt)) {
-
-                    Toast.makeText(getApplicationContext(),"Please Enter A Status First",Toast.LENGTH_SHORT).show();
-
-                    return;
-                }
-                Toast.makeText(getApplicationContext(),"Changes Updated Successfully",Toast.LENGTH_SHORT).show();
-
-                return;
+                updateBackend();
             }
         });
 
-        nicknameEt = (EditText) findViewById(R.id.changeNicknameEt);
+    }
 
-        statusEt = (EditText) findViewById(R.id.UpdateStatusEt);
+    private void updateBackend() {
+        String url = BASE_URL + "change-nickname/" + CURRENT_USER_ID +"/";
+        StringRequest stringRequest = new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(Friends.this, "Nickname successfully change", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Friends.this, "Nickname change unsuccesfull.Please try again !!", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("nickname",nicknameEt.getText().toString().trim());
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
+    }
+
+    private void initialize() {
+        saveChangesButton = (Button) findViewById(R.id.saveChangesButton);
+        nicknameEt = findViewById(R.id.changeNicknameEt);
+
     }
 }
