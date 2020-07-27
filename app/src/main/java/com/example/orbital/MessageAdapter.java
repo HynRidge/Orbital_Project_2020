@@ -5,12 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.orbital.Model.ContactModel;
 import com.example.orbital.R;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orbital.Model.Message;
-//import com.stfalcon.frescoimageviewer.ImageViewer;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -23,9 +24,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     private Context mContext;
 
-    public MessageAdapter(Context mContext,ArrayList<Message> messageList){
-        this.mContext = mContext;
-        this.messageList = messageList;
+    public MessageAdapter(){
     }
 
     @NonNull
@@ -43,6 +42,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public void onBindViewHolder(@NonNull final MessageViewHolder holder, final int position) {
         Message message = messageList.get(position);
+//        System.out.println(message + "Test");
+//        System.out.println(message.getMessage() + " HORRRAY");
+//        System.out.println(holder.show_message);
         holder.show_message.setText(message.getMessage());
 
         //Remember to set up for profile pic
@@ -55,11 +57,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     @Override
     public int getItemViewType(int position) {
-        if(messageList.get(position).getSenderID() == Register2Activity.USER_ID) {
+        if(messageList.get(position).getSenderID() == LoginActivity.USER_ID) {
             return MSG_TYPE_RIGHT;
         } else {
             return MSG_TYPE_LEFT;
         }
+    }
+
+    public void setMessage(Context mContext, ArrayList<Message> messageList) {
+        this.mContext = mContext;
+        this.messageList =messageList;
+        notifyDataSetChanged();
     }
 
     class MessageViewHolder extends RecyclerView.ViewHolder{
@@ -69,7 +77,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         MessageViewHolder(View itemview){
             super(itemview);
             profile_image = itemview.findViewById(R.id.profile_image);
-            show_message = itemview.findViewById(R.id.show_message);
+            show_message = itemview.findViewById(R.id.show_message_current_user);
 
 
         }
