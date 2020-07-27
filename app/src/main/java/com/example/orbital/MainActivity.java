@@ -101,8 +101,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         queue.add(stringRequest);
-
-        getSupportActionBar().setTitle(CURRENT_USER_NICKNAME);
     }
 
     private void sendUserToChangeNicknamePage() {
