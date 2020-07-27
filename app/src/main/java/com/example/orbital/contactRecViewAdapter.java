@@ -70,6 +70,7 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
                 intent.putExtra("contactId",contacts.get(position).getContact_id());
                 intent.putExtra("contactNickname",contacts.get(position).getContact_name());
                 intent.putExtra("contactImage",contacts.get(position).getImage());
+                intent.putExtra("roomID",ROOM_ID);
 
                 mContext.startActivity(intent);
             }
@@ -172,6 +173,7 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
     public void setContacts(ArrayList<ContactModel> contacts, Context mContext) {
         this.contacts = contacts;
         this.mContext = mContext;
+        notifyDataSetChanged();
     }
 
 
