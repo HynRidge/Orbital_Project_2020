@@ -62,7 +62,7 @@ class GetMessageView(ListAPIView):
         # user_id = self.kwargs['user_id']
         # receiver_id = self.kwargs['receiver_id']
 
-        return Message.objects.filter(room= room_id)
+        return Message.objects.filter(room = room_id)
 
 
 class AddContactView(CreateAPIView):
