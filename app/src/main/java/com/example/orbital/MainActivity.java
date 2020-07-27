@@ -9,8 +9,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Method;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar mToolbar;
@@ -20,13 +31,32 @@ public class MainActivity extends AppCompatActivity {
     private static Context context;
 
     FloatingActionButton add_contact_btn;
+    FloatingActionButton change_nickname_btn;
+
+    int CURRENT_USER_ID= LoginActivity.USER_ID;
+    String CURRENT_USER_NICKNAME;
+    String BASE_URL = " http://172.31.123.95:8000/account/";
+
+    RequestQueue queue ;
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        getCurrentUserNickname();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        queue = Volley.newRequestQueue(getApplicationContext());
+
         initialize();
+
+        getCurrentUserNickname();
+
 
         add_contact_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +65,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        change_nickname_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendUserToChangeNicknamePage();
+            }
+        });
 
+
+    }
+
+    private void getCurrentUserNickname() {
+        String url = BASE_URL + "get-nickname/" + CURRENT_USER_ID+"/";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                mToolbar = findViewById(R.id.main_page_toolbar);
+                setSupportActionBar(mToolbar);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if(jsonObject.getString("nickname").equals("")) {
+                        getSupportActionBar().setTitle("Anonymous User");
+                    } else {
+                        getSupportActionBar().setTitle(jsonObject.getString("nickname"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(stringRequest);
+
+        getSupportActionBar().setTitle(CURRENT_USER_NICKNAME);
+    }
+
+    private void sendUserToChangeNicknamePage() {
+        Intent activity = new Intent(getApplicationContext(), Friends.class);
+        startActivity(activity);
     }
 
     private void sendUserToAddContactPage() {
@@ -51,10 +123,11 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.context = getApplicationContext();
 
         add_contact_btn = findViewById(R.id.add_contact_button);
+        change_nickname_btn = findViewById(R.id.change_nickname_btn);
 
         mToolbar = findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Close Friends");
+
 
         myViewPager = findViewById(R.id.main_tabs_pager);
         tabsAccessorAdapter = new TabsAccessorAdapter(getSupportFragmentManager());
