@@ -76,15 +76,11 @@ public class ContactsFragment extends Fragment {
     private void requestForCurrentUserContact() {
         contactsID.clear();
         String url = BASE_URL + "get-contact/" + CURRENT_USER_ID +"/";
-        System.out.println("AFter URL");
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println("get current user contact succeed");
                 try {
-                    System.out.println("IN HERE");
                     JSONArray jsonArray = new JSONArray(response);
-                    System.out.println("AFTER JSPON ARRAY");
                     for(int i = 0 ; i < jsonArray.length() ; i++) {
                         JSONObject jo = jsonArray.getJSONObject(i);
                         contactsID.add(jo.getInt("contact"));
@@ -98,7 +94,6 @@ public class ContactsFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "Get Contact failed, please try again!!", Toast.LENGTH_SHORT).show();
-                System.out.println(error.toString()+ " "+ 1);
             }
         });
         queue.add(stringRequest);
@@ -111,7 +106,6 @@ public class ContactsFragment extends Fragment {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    System.out.println("Get nickname succeed");
                     try{
                         JSONObject jsonObject = new JSONObject(response);
                         if(jsonObject.getString("nickname").equals("")) {
@@ -133,7 +127,7 @@ public class ContactsFragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(getContext(), "Get Nickname failed, try again!!", Toast.LENGTH_SHORT).show();
-                    System.out.println(error.toString() +" "+ 2);
+
                 }
             });
             queue.add(stringRequest);
