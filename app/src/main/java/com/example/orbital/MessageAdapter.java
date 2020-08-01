@@ -42,9 +42,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public void onBindViewHolder(@NonNull final MessageViewHolder holder, final int position) {
         Message message = messageList.get(position);
-//        System.out.println(message + "Test");
-//        System.out.println(message.getMessage() + " HORRRAY");
-//        System.out.println(holder.show_message);
         holder.show_message.setText(message.getMessage());
 
         //Remember to set up for profile pic
