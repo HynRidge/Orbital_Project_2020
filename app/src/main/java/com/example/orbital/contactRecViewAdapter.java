@@ -138,11 +138,9 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
         StringRequest stringRequest =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println("Room Created");
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     ROOM_ID = jsonObject.getInt("id");
-                    System.out.println(ROOM_ID);
                     createParticipants(position);
                 } catch (JSONException e) {
                     e.printStackTrace();
