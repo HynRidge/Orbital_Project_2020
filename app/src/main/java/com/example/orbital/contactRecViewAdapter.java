@@ -69,7 +69,7 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
             @Override
             public void onClick(View v) {
                 checkRoomCreated(position);
-                getMessage();
+
 
                 Intent intent = new Intent(mContext,MessageActivity.class);
                 intent.putExtra("contactId",contacts.get(position).getContact_id());
@@ -120,6 +120,7 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
                     } else {
                         JSONObject jsonObject =  jsonArray.getJSONObject(0);
                         ROOM_ID = jsonObject.getInt("room");
+                        getMessage();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
