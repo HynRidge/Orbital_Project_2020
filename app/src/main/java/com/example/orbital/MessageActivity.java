@@ -77,6 +77,12 @@ public class MessageActivity extends AppCompatActivity {
     RequestQueue queue;
 
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        showMessages();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +92,6 @@ public class MessageActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(getApplicationContext());
         initialize();
 
-        showMessages();
-
-
         messageAdapter.setMessage(MessageActivity.this,msg);
         recyclerView.setAdapter(messageAdapter);
 
@@ -96,6 +99,7 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateBackend();
+                edit_message.setText("");
             }
         });
 
@@ -109,7 +113,7 @@ public class MessageActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-               showMessages();
+//               showMessages();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -202,6 +206,5 @@ public class MessageActivity extends AppCompatActivity {
         nickname.setText(CONTACT_NICKNAME);
         profileImage.setImageResource(CONTACT_IMG);
 
-        msg = new ArrayList<Message>();
     }
 }
