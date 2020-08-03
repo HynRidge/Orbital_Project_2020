@@ -2,6 +2,7 @@ package com.example.orbital;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
 
     Context mContext;
 
-    String BASE_URL = "http://172.31.123.95:8000/account/";
+    String BASE_URL = mContext.getResources().getString(R.string.base_url);
     int CURRENT_USER_ID = LoginActivity.USER_ID;
     int PRIVATE_CHAT = 1;
 

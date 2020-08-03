@@ -41,7 +41,7 @@ public class Register2Activity extends AppCompatActivity {
     EditText enterBirthday, enterNickname;
     Button submitBtn;
     RequestQueue queue;
-    String url = "http://172.31.123.95:8000/account/register/";
+    String BASE_URL = getString(R.string.base_url);
     String firstNameSaved = RegisterActivity.firstNameSaved;
     String lastNameSaved = RegisterActivity.lastNameSaved;
     String emailSaved = RegisterActivity.emailSaved;
@@ -80,6 +80,7 @@ public class Register2Activity extends AppCompatActivity {
     }
 
     private void register() {
+        String url = BASE_URL +"register/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

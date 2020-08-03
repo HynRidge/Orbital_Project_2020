@@ -71,7 +71,7 @@ public class MessageActivity extends AppCompatActivity {
 
     ArrayList<Message> msg;
 
-    String BASE_URL = "http://172.31.123.95:8000/account/";
+    String BASE_URL = getString(R.string.base_url);
     RequestQueue queue;
 
 

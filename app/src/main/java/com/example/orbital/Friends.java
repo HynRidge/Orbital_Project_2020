@@ -29,7 +29,7 @@ public class Friends extends AppCompatActivity {
     EditText nicknameEt;
 
     int CURRENT_USER_ID= LoginActivity.USER_ID;
-    String BASE_URL = " http://172.31.123.95:8000/account/";
+    String BASE_URL =getString(R.string.base_url);
 
     RequestQueue queue ;
 

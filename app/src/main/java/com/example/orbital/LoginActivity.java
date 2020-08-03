@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     RequestQueue queue;
     String USER_PHONE_NUMBER;
     String LOGIN_URL ="http://172.31.123.95:8000/account/api/token/login/";
-    String BASE_URL = "http://172.31.123.95:8000/account/";
+    String BASE_URL = getString(R.string.base_url);
     public static int USER_ID;
     String accessToken,refreshToken;
 
@@ -77,7 +77,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
+        String url = BASE_URL +"api/token/login/";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 //                Log.d("Server responded",response);
