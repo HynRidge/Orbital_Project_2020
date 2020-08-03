@@ -21,6 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.orbital.Model.ContactModel;
+import com.example.orbital.Model.Message;
+import com.example.orbital.Model.URL;
 import com.example.orbital.Model.chatModel;
 
 import org.json.JSONArray;
@@ -35,10 +37,11 @@ import java.util.Map;
 public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAdapter.ViewHolder> {
 
     ArrayList<ContactModel> contacts = new ArrayList<>();
+    ArrayList<Message> msg = new ArrayList<>();
 
     Context mContext;
 
-    String BASE_URL = mContext.getResources().getString(R.string.base_url);
+    String BASE_URL = URL.BASE_URL;
     int CURRENT_USER_ID = LoginActivity.USER_ID;
     int PRIVATE_CHAT = 1;
 
@@ -66,16 +69,43 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
             @Override
             public void onClick(View v) {
                 checkRoomCreated(position);
+                getMessage();
 
                 Intent intent = new Intent(mContext,MessageActivity.class);
                 intent.putExtra("contactId",contacts.get(position).getContact_id());
                 intent.putExtra("contactNickname",contacts.get(position).getContact_name());
                 intent.putExtra("contactImage",contacts.get(position).getImage());
                 intent.putExtra("roomID",ROOM_ID);
+                intent.putParcelableArrayListExtra("messages",msg);
 
                 mContext.startActivity(intent);
             }
         });
+    }
+
+    private void getMessage() {
+        String url = BASE_URL + "get-message/" + ROOM_ID +"/";
+        StringRequest stringRequest =  new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                msg.clear();
+                try {
+                    JSONArray jsonArray =  new JSONArray(response);
+                    for(int i = 0; i < jsonArray.length(); i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        msg.add(new Message(jsonObject.getInt("sender_user"),ROOM_ID,jsonObject.getString("message")));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, "Failed to show messages", Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(stringRequest);
     }
 
     private void checkRoomCreated(final int position) {

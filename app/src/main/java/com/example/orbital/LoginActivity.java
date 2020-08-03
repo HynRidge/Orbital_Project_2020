@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.orbital.Model.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,8 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView needAnAcc;
     RequestQueue queue;
     String USER_PHONE_NUMBER;
-    String LOGIN_URL ="http://172.31.123.95:8000/account/api/token/login/";
-    String BASE_URL = getString(R.string.base_url);
+    String BASE_URL = URL.BASE_URL;
     public static int USER_ID;
     String accessToken,refreshToken;
 

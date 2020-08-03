@@ -1,6 +1,9 @@
 package com.example.orbital.Model;
 
-public class Message {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Message implements Parcelable {
         private int senderID;
         private int roomID;
         private String message;
@@ -10,6 +13,24 @@ public class Message {
         this.roomID = roomID;
         this.message = message;
     }
+
+    protected Message(Parcel in) {
+        senderID = in.readInt();
+        roomID = in.readInt();
+        message = in.readString();
+    }
+
+    public static final Creator<Message> CREATOR = new Creator<Message>() {
+        @Override
+        public Message createFromParcel(Parcel in) {
+            return new Message(in);
+        }
+
+        @Override
+        public Message[] newArray(int size) {
+            return new Message[size];
+        }
+    };
 
     public int getSenderID() {
         return senderID;
@@ -33,5 +54,17 @@ public class Message {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(senderID);
+        dest.writeInt(roomID);
+        dest.writeString(message);
     }
 }

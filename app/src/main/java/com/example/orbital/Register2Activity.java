@@ -23,6 +23,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.orbital.Model.URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +42,7 @@ public class Register2Activity extends AppCompatActivity {
     EditText enterBirthday, enterNickname;
     Button submitBtn;
     RequestQueue queue;
-    String BASE_URL = getString(R.string.base_url);
+    String BASE_URL = URL.BASE_URL;
     String firstNameSaved = RegisterActivity.firstNameSaved;
     String lastNameSaved = RegisterActivity.lastNameSaved;
     String emailSaved = RegisterActivity.emailSaved;

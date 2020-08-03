@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.orbital.Model.URL;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class Friends extends AppCompatActivity {
     EditText nicknameEt;
 
     int CURRENT_USER_ID= LoginActivity.USER_ID;
-    String BASE_URL =getString(R.string.base_url);
+    String BASE_URL = URL.BASE_URL;
 
     RequestQueue queue ;
 

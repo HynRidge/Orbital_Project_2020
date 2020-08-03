@@ -32,12 +32,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.orbital.Model.Message;
+import com.example.orbital.Model.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +73,7 @@ public class MessageActivity extends AppCompatActivity {
 
     ArrayList<Message> msg;
 
-    String BASE_URL = getString(R.string.base_url);
+    String BASE_URL = URL.BASE_URL;
     RequestQueue queue;
 
 
@@ -86,12 +88,18 @@ public class MessageActivity extends AppCompatActivity {
 
         showMessages();
 
+
+        messageAdapter.setMessage(MessageActivity.this,msg);
+        recyclerView.setAdapter(messageAdapter);
+
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateBackend();
             }
         });
+
+
 
 
     }
@@ -134,9 +142,6 @@ public class MessageActivity extends AppCompatActivity {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         msg.add(new Message(jsonObject.getInt("sender_user"),ROOM_ID,jsonObject.getString("message")));
                     }
-
-                    messageAdapter.setMessage(MessageActivity.this,msg);
-                    recyclerView.setAdapter(messageAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -192,6 +197,7 @@ public class MessageActivity extends AppCompatActivity {
         CONTACT_NICKNAME = intent.getStringExtra("contactNickname");
         CONTACT_IMG = intent.getIntExtra("contactImage", R.drawable.defaultpic);
         ROOM_ID = intent.getIntExtra("roomID", -1);
+        msg = intent.getParcelableArrayListExtra("messages");
 
         nickname.setText(CONTACT_NICKNAME);
         profileImage.setImageResource(CONTACT_IMG);
