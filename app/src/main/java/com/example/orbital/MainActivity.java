@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.orbital.Model.URL;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     int CURRENT_USER_ID= LoginActivity.USER_ID;
     String CURRENT_USER_NICKNAME;
-    String BASE_URL = getString(R.string.base_url);
+    String BASE_URL = URL.BASE_URL;
 
     RequestQueue queue ;
 
