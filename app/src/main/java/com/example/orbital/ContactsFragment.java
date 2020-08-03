@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.orbital.Model.ContactModel;
+import com.example.orbital.Model.URL;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +33,7 @@ import java.util.Objects;
 
 public class ContactsFragment extends Fragment {
 
-    String BASE_URL = "http://172.31.123.95:8000/account/";
+    String BASE_URL = URL.BASE_URL;
 
     RequestQueue queue;
 
