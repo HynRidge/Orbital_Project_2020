@@ -1,6 +1,7 @@
 package com.example.orbital;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -78,11 +79,12 @@ public class MessageActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        showMessages();
-
+    protected void onResume() {
+        super.onResume();
+        messageAdapter.setMessage(MessageActivity.this,msg);
+        recyclerView.setAdapter(messageAdapter);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,20 +94,20 @@ public class MessageActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(getApplicationContext());
         initialize();
 
-        messageAdapter.setMessage(MessageActivity.this,msg);
-        recyclerView.setAdapter(messageAdapter);
+//        System.out.println(getLifecycle().getCurrentState() + " It is here");
+
+
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateBackend();
+                msg.add(new Message(CURRENT_USER_ID,ROOM_ID,edit_message.getText().toString()));
                 edit_message.setText("");
+                messageAdapter.setMessage(MessageActivity.this,msg);
+                recyclerView.setAdapter(messageAdapter);
             }
         });
-
-
-
-
     }
 
     private void updateBackend() {
@@ -113,7 +115,7 @@ public class MessageActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//               showMessages();
+               showMessages();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -146,6 +148,8 @@ public class MessageActivity extends AppCompatActivity {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         msg.add(new Message(jsonObject.getInt("sender_user"),ROOM_ID,jsonObject.getString("message")));
                     }
+                    messageAdapter.setMessage(MessageActivity.this,msg);
+                    recyclerView.setAdapter(messageAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -205,6 +209,8 @@ public class MessageActivity extends AppCompatActivity {
 
         nickname.setText(CONTACT_NICKNAME);
         profileImage.setImageResource(CONTACT_IMG);
+
+
 
     }
 }

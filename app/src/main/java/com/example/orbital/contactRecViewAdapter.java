@@ -83,30 +83,6 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
         });
     }
 
-    private void getMessage() {
-        String url = BASE_URL + "get-message/" + ROOM_ID +"/";
-        StringRequest stringRequest =  new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                msg.clear();
-                try {
-                    JSONArray jsonArray =  new JSONArray(response);
-                    for(int i = 0; i < jsonArray.length(); i++){
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        msg.add(new Message(jsonObject.getInt("sender_user"),ROOM_ID,jsonObject.getString("message")));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, "Failed to show messages", Toast.LENGTH_SHORT).show();
-            }
-        });
-        queue.add(stringRequest);
-    }
 
     private void checkRoomCreated(final int position) {
         String url = BASE_URL +"find-room/" + CURRENT_USER_ID + "/"  +contacts.get(position).getContact_id()+ "/";
@@ -135,6 +111,30 @@ public class contactRecViewAdapter extends RecyclerView.Adapter<contactRecViewAd
         queue.add(stringRequest);
     }
 
+    private void getMessage() {
+        String url = BASE_URL + "get-message/" + ROOM_ID +"/";
+        StringRequest stringRequest =  new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                msg.clear();
+                try {
+                    JSONArray jsonArray =  new JSONArray(response);
+                    for(int i = 0; i < jsonArray.length(); i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        msg.add(new Message(jsonObject.getInt("sender_user"),ROOM_ID,jsonObject.getString("message")));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, "Failed to show messages", Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(stringRequest);
+    }
 
     private void createParticipants(int position) {
         String url = BASE_URL +"participants/";
